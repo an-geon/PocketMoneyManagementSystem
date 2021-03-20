@@ -35,7 +35,7 @@ public class MenuManager {
 			}
 			else if (num == 3) {
 				System.out.println("Content        Price         Balance");
-				//지금까지 수입, 지출 출력
+				//cumulative income, outlay, content, balance    print
 			}	
 			else if (num == 4) 
 				continue;		
