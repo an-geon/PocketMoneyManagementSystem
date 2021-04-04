@@ -2,10 +2,9 @@ import java.util.Scanner;
 
 public class MenuManager {
 	public static void main(String[] args) {
-		int num = 0;
-		int Pmoney = 0;
-		int balance = 0;
 		Scanner input = new Scanner(System.in);
+		PocketmoneyManager pocketmoneymanager = new PocketmoneyManager(input);
+		int num = 0;		
 		
 		while(num != 5) {
 			System.out.println("*******PocketMoney Management System Menu*******");
@@ -18,24 +17,13 @@ public class MenuManager {
 			num = input.nextInt();
 		
 			if (num == 1) {
-				System.out.print("Content :");
-				String content = input.next();
-				System.out.print("Price :");
-				Pmoney = input.nextInt();
-				balance = balance + Pmoney;
-				System.out.println("balance : " + balance);
+					pocketmoneymanager.incomePocketmoney();
 			}
 			else if (num == 2) {
-				System.out.print("Item :");
-				String Item = input.next();
-				System.out.print("Price :");
-				Pmoney = input.nextInt();
-				balance = balance - Pmoney;
-				System.out.println("balance : " + balance);
+					pocketmoneymanager.outlayPocketmoney();
 			}
 			else if (num == 3) {
-				System.out.println("Content        Price         Balance");
-				//cumulative income, outlay, content, balance    print
+				pocketmoneymanager.viewList();
 			}	
 			else if (num == 4) 
 				continue;		
@@ -43,4 +31,5 @@ public class MenuManager {
 				break;
 		}	
 	}
+	
 }
