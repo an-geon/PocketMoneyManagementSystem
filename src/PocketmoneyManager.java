@@ -17,7 +17,7 @@ public class PocketmoneyManager {
 			kind = input.nextInt();
 			
 			if (kind == 1) {
-				pocketmoney = new Pocketmoney();
+				pocketmoney = new Income();
 				pocketmoney.getUserInput(input);
 				index = pocketmoney.getIndex();
 				if(index == 0) {
@@ -34,7 +34,7 @@ public class PocketmoneyManager {
 				break;
 			}
 			else if (kind == 2) {
-				pocketmoney = new Pocketmoney();
+				pocketmoney = new Outlay();
 				pocketmoney.getUserInput(input);
 				index = pocketmoney.getIndex();
 				if(index == 0) {
@@ -43,7 +43,7 @@ public class PocketmoneyManager {
 				}
 				else {
 					pocketmoney.setBalance(pocketmoney1.get(pocketmoney.getIndex()-1).getBalance() 
-							                                                    - pocketmoney.getPrice());
+							                                                    + pocketmoney.getPrice());
 					pocketmoney.setIndex(index+1);
 				}
 				pocketmoney.setKind(Addkind.Outlay);
@@ -73,12 +73,22 @@ public class PocketmoneyManager {
 		int num = input.nextInt();
 		if (num == 1) {
 			System.out.print("Input the new content:");
-			pocketmoney.content = input.next();
+			pocketmoney.setContent(input.next());
 		}
 		else if (num == 2) {
 			System.out.print("Input the new price:");
-			pocketmoney.price = input.nextInt();
+			pocketmoney.setPrice(input.nextInt());
+			if(index == 0) {
+				pocketmoney.balance = pocketmoney.price;
+				for(int i = 1; i < pocketmoney1.size(); i++) {
+					pocketmoney1.get(i).setBalance(pocketmoney1.get(i-1).getBalance() + pocketmoney1.get(i).getPrice());
+				}
+				return;
+			}
 			pocketmoney.balance = pocketmoney1.get(index-1).getBalance() + pocketmoney.price;
+			for(int i = 1; i < pocketmoney1.size(); i++) {
+				pocketmoney1.get(i).setBalance(pocketmoney1.get(i-1).getBalance() + pocketmoney1.get(i).getPrice());
+			}
 		}
 	}
 	

@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Pocketmoney {
+public abstract class Pocketmoney {
 	protected Addkind kind = Addkind.Income;
 	protected String date;
 	protected String content;
