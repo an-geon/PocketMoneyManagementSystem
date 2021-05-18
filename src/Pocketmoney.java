@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import exceptions.DateFormatException;
+
 public abstract class Pocketmoney {
 	protected Addkind kind = Addkind.Income;
 	protected String date;
@@ -37,8 +39,11 @@ public abstract class Pocketmoney {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(String date) throws DateFormatException {
 		this.date = date;
+		if(!date.contains("/")) {
+			throw new DateFormatException();
+		}
 	}
 
 	public String getContent() {
@@ -73,15 +78,28 @@ public abstract class Pocketmoney {
 		this.index = index;
 	}
 	
-	public void getUserInput(Scanner input) {
-		System.out.print("Date :");
-		String date = input.next();
-		this.setDate(date);
-		
+
+	public void setUserDate(Scanner input) {
+		String date = "";
+		while(!date.contains("/")) {
+			System.out.print("Date :");
+			date = input.next();
+			try {
+				this.setDate(date);
+			} catch (DateFormatException e) {
+				System.out.println("Date format : month/day");
+			}
+		}
+	}
+	
+	public void setUserContent(Scanner input) {
 		System.out.print("Content :");
 		String content = input.next();
 		this.setContent(content);
 		
+	}
+	
+	public void setUserPrice(Scanner input) {
 		System.out.print("Price :");
 		int price = input.nextInt();
 		this.setPrice(price);
