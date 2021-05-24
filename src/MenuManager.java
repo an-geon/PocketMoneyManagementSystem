@@ -1,12 +1,26 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import log.EventLogger;
+
 public class MenuManager {
+	static EventLogger logger = new EventLogger("log.txt");
+	
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
-		PocketmoneyManager pocketmoneymanager = new PocketmoneyManager(input);
+		PocketmoneyManager pocketmoneymanager = getObject("pocketmoneymanager.ser");
+		if(pocketmoneymanager == null) {
+			pocketmoneymanager = new PocketmoneyManager(input);
+		}
 		
 		selectMenu(pocketmoneymanager, input);
+		putObject(pocketmoneymanager, "pocketmoneymanager.ser");
 	}
 	
 	public static void selectMenu(PocketmoneyManager pocketmoneymanager, Scanner input) {
@@ -18,12 +32,15 @@ public class MenuManager {
 				num = input.nextInt();
 				if (num == 1) {
 					pocketmoneymanager.addPocketmoney();
+					logger.log("add pocketmoney");
 				}
 				else if (num == 2) {
 					pocketmoneymanager.editPocketmoney();
+					logger.log("edit pocketmoney");
 				}
 				else if (num == 3) {
-				pocketmoneymanager.viewList();
+					pocketmoneymanager.viewList();
+					logger.log("view pocketmoney list");
 				}		
 				else
 					break;
@@ -44,5 +61,46 @@ public class MenuManager {
 		System.out.println("3. View PocketMoney List");
 		System.out.println("4. Exit ");
 		System.out.print("Select number 1~4 :");
+	}
+	
+	public static PocketmoneyManager getObject(String filename) {
+		PocketmoneyManager pocketmoneymanager = null;
+		
+		try {
+			FileInputStream file = new FileInputStream(filename);
+			ObjectInputStream in = new ObjectInputStream(file);
+			
+			pocketmoneymanager = (PocketmoneyManager) in.readObject();
+			
+			file.close();
+			in.close();
+			
+		} catch (FileNotFoundException e) { 
+			return pocketmoneymanager;
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return pocketmoneymanager;
+	}
+	
+	public static void putObject(PocketmoneyManager pocketmoneymanager, String filename) {
+		try {
+			FileOutputStream file = new FileOutputStream(filename);
+			ObjectOutputStream out = new ObjectOutputStream(file);
+			
+			out.writeObject(pocketmoneymanager);
+			
+			file.close();
+			out.close();
+			
+		} catch (FileNotFoundException e) { 
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		
 	}
 }

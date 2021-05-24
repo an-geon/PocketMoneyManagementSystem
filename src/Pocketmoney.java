@@ -1,9 +1,15 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import exceptions.DateFormatException;
 
-public abstract class Pocketmoney {
+public abstract class Pocketmoney implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5792128772175756621L;
+	
 	protected Addkind kind = Addkind.Income;
 	protected String date;
 	protected String content;
