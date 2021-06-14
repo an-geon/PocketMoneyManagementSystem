@@ -76,8 +76,8 @@ public class MenuManager {
 			
 			pocketmoneymanager = (PocketmoneyManager) in.readObject();
 			
-			file.close();
 			in.close();
+			file.close();
 			
 		} catch (FileNotFoundException e) { 
 			return pocketmoneymanager;
@@ -97,8 +97,8 @@ public class MenuManager {
 			
 			out.writeObject(pocketmoneymanager);
 			
-			file.close();
 			out.close();
+			file.close();
 			
 		} catch (FileNotFoundException e) { 
 			e.printStackTrace();

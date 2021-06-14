@@ -14,7 +14,7 @@ public class WindowFrame extends JFrame{
 	
 	public WindowFrame (PocketmoneyManager pocketmoneymanager) {
 		this.pocketmoneymanager = pocketmoneymanager;
-		pocketmoneyadder = new PocketMoneyAdder(this);
+		pocketmoneyadder = new PocketMoneyAdder(this, this.pocketmoneymanager);
 		pocketmoneyviewer = new PocketMoneyViewer(this, this.pocketmoneymanager);
 		menuselection = new MenuSelection(this);
 		

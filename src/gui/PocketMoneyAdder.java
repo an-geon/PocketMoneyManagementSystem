@@ -7,18 +7,21 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
+import listener.ButtonCancelListener;
+import listener.PocketmoneyAdderListener;
+import manager.PocketmoneyManager;
+
 public class PocketMoneyAdder extends JPanel{
 	
+	PocketmoneyManager pocketmoneymanager;
 	WindowFrame frame;
 	
-	public PocketMoneyAdder(WindowFrame frame) {
+	public PocketMoneyAdder(WindowFrame frame, PocketmoneyManager pocketmoneymanager) {
 		this.frame = frame;
+		this.pocketmoneymanager = pocketmoneymanager;
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new SpringLayout());
-		
-		JButton button1 = new JButton("Save");
-		JButton button2 = new JButton("Cancel");
 		
 		JLabel labeldate = new JLabel("Date :", JLabel.TRAILING);
 		JTextField fielddate = new JTextField(10);
@@ -35,6 +38,13 @@ public class PocketMoneyAdder extends JPanel{
 		JLabel labelprice = new JLabel("Price :", JLabel.TRAILING);
 		JTextField fieldprice = new JTextField(10);
 		labeldate.setLabelFor(fieldprice);
+		
+		JButton button1 = new JButton("Save");
+		button1.addActionListener(new PocketmoneyAdderListener(fielddate, fieldcontent, fieldprice, pocketmoneymanager));
+		
+		JButton button2 = new JButton("Cancel");
+		button2.addActionListener(new ButtonCancelListener(frame));
+		
 		panel.add(labelprice);
 		panel.add(fieldprice);
 		

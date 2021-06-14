@@ -111,4 +111,8 @@ public abstract class Pocketmoney implements Serializable{
 		int price = input.nextInt();
 		this.setPrice(price);
 	}
+	
+	public void printinfo() {
+		System.out.println("Date : " + date + "Content : " + content + "Price : " + price + "Balance : " + balance);
+	}
 }

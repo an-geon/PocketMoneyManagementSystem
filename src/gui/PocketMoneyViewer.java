@@ -20,6 +20,36 @@ public class PocketMoneyViewer extends JPanel{
 	PocketmoneyManager pocketmoneymanager;
 	WindowFrame frame;
 	
+	public PocketmoneyManager getPocketmoneymanager() {
+		return pocketmoneymanager;
+	}
+
+	public void setPocketmoneymanager(PocketmoneyManager pocketmoneymanager) {
+		this.pocketmoneymanager = pocketmoneymanager;
+		this.removeAll();
+		
+		DefaultTableModel model = new DefaultTableModel();
+		model.addColumn("Date");
+		model.addColumn("Content");
+		model.addColumn("Price");
+		model.addColumn("Balance");
+		
+		for(int i = 0; i <  pocketmoneymanager.size(); i++) {
+			Vector row = new Vector();
+			Pocketmoney pm = pocketmoneymanager.get(i);
+			row.add(pm.getDate());
+			row.add(pm.getContent());
+			row.add(pm.getPrice());
+			row.add(pm.getBalance());
+			model.addRow(row);
+		}
+		
+		JTable table = new JTable(model);
+		JScrollPane sp = new JScrollPane(table);
+		
+		this.add(sp);
+	}
+	
 	public PocketMoneyViewer(WindowFrame frame, PocketmoneyManager pocketmoneymanager) {
 		this.frame = frame;
 		this.pocketmoneymanager = pocketmoneymanager;

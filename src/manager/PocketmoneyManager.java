@@ -1,4 +1,5 @@
 package manager;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,12 +13,18 @@ public class PocketmoneyManager implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1747026752167437005L;
+	
+	private static final long serialVersionUID = 9051908922268417012L;
+	
 	
 	ArrayList <Pocketmoney> pocketmoney1 = new ArrayList <Pocketmoney>();
 	transient Scanner input;
 	PocketmoneyManager(Scanner input){
 		this.input = input;
+	}
+	
+	public void addPocketmoney(Pocketmoney pocketmoney) {
+		pocketmoney1.add(pocketmoney);
 	}
 	
 	public void addPocketmoney() {
